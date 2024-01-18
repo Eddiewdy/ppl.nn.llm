@@ -46,6 +46,7 @@
 #include "ppl/nn/engines/llm_cuda/ops/pmx/silu_op.h"
 #include "ppl/nn/engines/llm_cuda/ops/pmx/swiglu_op.h"
 
+#include "ppl/nn/engines/llm_cuda/ops/pmx/dynamic_batching/alibi_mask_op.h"
 #include "ppl/nn/engines/llm_cuda/ops/pmx/dynamic_batching/key_value_cache_op.h"
 #include "ppl/nn/engines/llm_cuda/ops/pmx/dynamic_batching/multi_head_attention_op.h"
 #include "ppl/nn/engines/llm_cuda/ops/pmx/dynamic_batching/multi_head_cache_attention_op.h"
@@ -180,6 +181,7 @@ void RegisterBuiltinOpImpls() {
     /*                        PMX.DYNAMIC_BATCHING                            */
     /*                                                                        */
     // A
+    RegisterOptKernelCreator<pmx::DynamicBatchingAlibiMaskOp>("pmx.dynamic_batching", "ALiBiMask", 1, 1);
     // B
     // C
     // D

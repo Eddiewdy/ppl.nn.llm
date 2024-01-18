@@ -1,5 +1,6 @@
 #include "ppl/nn/common/logger.h"
 #include "ppl/nn/models/onnx/param_parser_manager.h"
+#include "ppl/nn/models/onnx/parsers/pmx/parse_alibi_mask_param.h"
 #include "ppl/nn/models/onnx/parsers/pmx/parse_column_parallel_linear_param.h"
 #include "ppl/nn/models/onnx/parsers/pmx/parse_gelu_param.h"
 #include "ppl/nn/models/onnx/parsers/pmx/parse_key_value_cache_param.h"
@@ -94,6 +95,8 @@ void RegisterParsers() {
                                ppl::nn::pmx::ParseSwishParam, nullptr);
 
     // dynamic batching
+    PPL_REGISTER_OP_WITH_PARAM("pmx.dynamic_batching", "ALiBiMask", 1, 1, ppl::nn::pmx::AlibiMaskParam,
+                               ppl::nn::pmx::ParseAlibiMaskParam, nullptr);
     PPL_REGISTER_OP_WITH_PARAM("pmx.dynamic_batching", "KeyValueCache", 1, 1, ppl::nn::pmx::KeyValueCacheParam,
                                ppl::nn::pmx::ParseKeyValueCacheParam, nullptr);
     PPL_REGISTER_OP_WITH_PARAM("pmx.dynamic_batching", "MultiHeadAttention", 1, 1,
